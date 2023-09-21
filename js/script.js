@@ -1,22 +1,22 @@
-import isCpf from "./valida-cpf.js";
+import isCpf from "./valida-cpf.js"; //importando os arquivos externos.
 import isAdult from "./valida-idade.js";
 
 const camposDoFormulario = document.querySelectorAll("[required]");
 const formulario = document.querySelector('[data-formulario]');
 
 formulario.addEventListener("submit", (e) => {
-    e.preventDefault();
+    e.preventDefault(); //previne que o refresh do submmit seja ativado.
 
     const listaRespostas = {
         "nome": e.target.elements["nome"].value,
         "email": e.target.elements["email"].value,
         "rg": e.target.elements["rg"].value,
         "cpf": e.target.elements["cpf"].value,
-        "aniversario": e.target.elements["aniversario"].value,
+        "aniversario": e.target.elements["aniversario"].value, //pega as respostas de cada elemento para fazer a verificação.
     }
-    localStorage.setItem("cadastro", JSON.stringify(listaRespostas));
+    localStorage.setItem("cadastro", JSON.stringify(listaRespostas)); //armazena na local storage em formato JSON
 
-    window.location.href = "./abrir-conta-form-2.html";
+    window.location.href = "./abrir-conta-form-2.html"; //abre na tela o arquivo do próximo passo.
 });
 
 camposDoFormulario.forEach((campo) => {
@@ -66,7 +66,7 @@ const mensagens = {
 function verificaCampo(campo) {
     let mensagem = "";
 
-    campo.setCustomValidity('');
+    campo.setCustomValidity('');//limpa a mensagem de erro.
 
     if(campo.name == "cpf" && campo.value.length) {
         isCpf(campo);
